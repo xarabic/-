@@ -1,3 +1,6 @@
+# ===== ملف robots.txt لموقع X.ARABIC =====
+# ===== تم التحديث للرابط الجديد: https://xarabic.github.io/-/ =====
+
 User-agent: *
 Allow: /
 
@@ -18,44 +21,50 @@ Disallow: /js/
 Disallow: /fonts/
 Disallow: /images/
 
-# ===== السماح بزحف الروابط المهمة =====
+# ===== السماح بزحف روابط الفيديوهات المهمة =====
 Allow: /#video-sidi
 Allow: /#video-video4
 Allow: /#video-new-video-2026
 
 # ===== خريطة الموقع =====
-Sitemap: https://sexarabic.github.io/x/sitemap.xml
+Sitemap: https://xarabic.github.io/-/sitemap.xml
 
 # ===== وقت إعادة الزحف =====
 Crawl-delay: 5
 
-# ===== محركات البحث الأساسية =====
+# ===== محرك بحث Google =====
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 3
-Sitemap: https://sexarabic.github.io/x/sitemap.xml
+Sitemap: https://xarabic.github.io/-/sitemap.xml
 
+# ===== محرك بحث Bing =====
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 5
-Sitemap: https://sexarabic.github.io/x/sitemap.xml
+Sitemap: https://xarabic.github.io/-/sitemap.xml
 
+# ===== محرك بحث Yahoo (Slurp) =====
 User-agent: Slurp
 Allow: /
 Crawl-delay: 10
 
+# ===== محرك بحث DuckDuckGo =====
 User-agent: DuckDuckBot
 Allow: /
 Crawl-delay: 10
 
+# ===== محرك بحث Yandex =====
 User-agent: Yandex
 Allow: /
 Crawl-delay: 5
 
+# ===== محرك بحث Baidu =====
 User-agent: Baiduspider
 Allow: /
 Crawl-delay: 10
 
+# ===== بوتات وسائل التواصل =====
 User-agent: Pinterestbot
 Allow: /
 
@@ -64,3 +73,16 @@ Allow: /
 
 User-agent: Facebookexternalhit
 Allow: /
+
+# ===== بوتات أخرى =====
+User-agent: AhrefsBot
+Disallow: /
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Disallow: /
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+Crawl-delay: 10

@@ -61,7 +61,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- ===== 10. بيانات منظمة JSON-LD مع تاريخ اليوم (8 أغسطس) ===== -->
+    <!-- ===== 10. بيانات منظمة JSON-LD مع تاريخ اليوم ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -718,7 +718,7 @@
 
   <header>
     <a class="logo" href="#" onclick="navigateHome(); return false;">
-      <span class="x">arabic</span><span class="dot">.</span><span class="arabic">X</span>
+      <span class="x">X</span><span class="dot">.</span><span class="arabic">ARABIC</span>
     </a>
     <a class="back-home" href="#" onclick="navigateHome(); return false;">🏠 الرئيسية</a>
   </header>
@@ -766,6 +766,7 @@
   </div>
 
   <script>
+    // ===== استخدام ?video= بدلاً من #video- =====
     const videos = [
       {
         id: 'sidi',
@@ -793,6 +794,27 @@
     let autoPlayEnabled = true;
     let currentVideoIndex = 0;
 
+    // ===== قراءة الفيديو من الرابط =====
+    function getVideoFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      const videoId = params.get('video');
+      if (videoId) {
+        const index = videos.findIndex(v => v.id === videoId);
+        if (index !== -1) {
+          return index;
+        }
+      }
+      return -1;
+    }
+
+    // ===== تحديث الرابط =====
+    function updateURL(videoId) {
+      const url = new URL(window.location.href);
+      url.search = '?video=' + videoId;
+      window.history.pushState({}, '', url);
+    }
+
+    // ===== عرض الفيديوهات =====
     function renderVideos() {
       const grid = document.getElementById('videosGrid');
       grid.innerHTML = '';
@@ -825,6 +847,7 @@
       });
     }
 
+    // ===== عرض المقترحات =====
     function renderSuggested(currentIndex) {
       const grid = document.getElementById('suggestedGridMain');
       grid.innerHTML = '';
@@ -854,6 +877,7 @@
       });
     }
 
+    // ===== القائمة المنسدلة =====
     function toggleMenu(event, index) {
       event.stopPropagation();
       closeAllMenus();
@@ -896,16 +920,17 @@
       document.getElementById('videoDropdown').classList.add('show');
     }
 
+    // ===== نسخ ومشاركة =====
     function copyVideoUrl(index) {
       const video = videos[index];
-      const url = window.location.href.split('#')[0] + '#video-' + video.id;
+      const url = window.location.href.split('?')[0] + '?video=' + video.id;
       copyToClipboard(url);
       closeAllMenus();
     }
 
     function shareVideoUrl(index) {
       const video = videos[index];
-      const url = window.location.href.split('#')[0] + '#video-' + video.id;
+      const url = window.location.href.split('?')[0] + '?video=' + video.id;
       if (navigator.share) {
         navigator.share({ title: video.title, text: '🎬 شاهد هذا الفيديو على X.ARABIC', url: url }).catch(() => {});
       } else {
@@ -917,14 +942,14 @@
 
     function copyCurrentVideoUrl() {
       const video = videos[currentVideoIndex];
-      const url = window.location.href.split('#')[0] + '#video-' + video.id;
+      const url = window.location.href.split('?')[0] + '?video=' + video.id;
       copyToClipboard(url);
       closeAllMenus();
     }
 
     function shareVideo() {
       const video = videos[currentVideoIndex];
-      const url = window.location.href.split('#')[0] + '#video-' + video.id;
+      const url = window.location.href.split('?')[0] + '?video=' + video.id;
       if (navigator.share) {
         navigator.share({ title: video.title, text: '🎬 شاهد هذا الفيديو على X.ARABIC', url: url }).catch(() => {});
       } else {
@@ -977,21 +1002,25 @@
       document.getElementById('videoDropdown')?.classList.remove('show');
     }
 
+    // ===== التنقل بين الفيديوهات =====
     function navigateToVideo(index) {
       const video = videos[index];
       if (!video) return;
       currentVideoIndex = index;
       closeAllMenus();
+      
       document.getElementById('homePage').style.display = 'none';
       document.getElementById('videoPage').style.display = 'block';
       document.getElementById('activeTitleMain').textContent = video.title;
+      
       const source = document.getElementById('videoSourceMain');
       const player = document.getElementById('videoPlayerMain');
       source.src = video.url;
       player.load();
       player.play().catch(() => {});
+      
       renderSuggested(index);
-      window.location.hash = 'video-' + video.id;
+      updateURL(video.id);
       window.scrollTo(0, 0);
     }
 
@@ -1002,34 +1031,31 @@
       const player = document.getElementById('videoPlayerMain');
       player.pause();
       player.currentTime = 0;
-      window.location.hash = '';
+      window.history.pushState({}, '', window.location.href.split('?')[0]);
     }
 
-    function handleHash() {
-      const hash = window.location.hash;
-      if (hash.startsWith('#video-')) {
-        const id = hash.replace('#video-', '');
-        const index = videos.findIndex(v => v.id === id);
-        if (index !== -1) {
-          currentVideoIndex = index;
-          document.getElementById('homePage').style.display = 'none';
-          document.getElementById('videoPage').style.display = 'block';
-          const video = videos[index];
-          document.getElementById('activeTitleMain').textContent = video.title;
-          const source = document.getElementById('videoSourceMain');
-          const player = document.getElementById('videoPlayerMain');
-          source.src = video.url;
-          player.load();
-          player.play().catch(() => {});
-          renderSuggested(index);
-        } else {
-          navigateHome();
-        }
+    // ===== معالجة الرابط عند التحميل =====
+    function handleURL() {
+      const index = getVideoFromURL();
+      if (index !== -1) {
+        currentVideoIndex = index;
+        document.getElementById('homePage').style.display = 'none';
+        document.getElementById('videoPage').style.display = 'block';
+        const video = videos[index];
+        document.getElementById('activeTitleMain').textContent = video.title;
+        const source = document.getElementById('videoSourceMain');
+        const player = document.getElementById('videoPlayerMain');
+        source.src = video.url;
+        player.load();
+        player.play().catch(() => {});
+        renderSuggested(index);
       } else {
-        navigateHome();
+        document.getElementById('homePage').style.display = 'block';
+        document.getElementById('videoPage').style.display = 'none';
       }
     }
 
+    // ===== Auto-Play =====
     function setupAutoPlay() {
       const player = document.getElementById('videoPlayerMain');
       const checkbox = document.getElementById('autoPlayCheckbox');
@@ -1053,11 +1079,12 @@
       });
     }
 
-    window.addEventListener('hashchange', handleHash);
+    // ===== أحداث =====
+    window.addEventListener('popstate', handleURL);
 
     document.addEventListener('DOMContentLoaded', () => {
       renderVideos();
-      handleHash();
+      handleURL();
       setupAutoPlay();
     });
 

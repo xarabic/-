@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://xarabic.github.io/-/sitemap.xml

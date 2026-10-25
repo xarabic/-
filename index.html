@@ -22,7 +22,7 @@
 <body>
 <div id="game"></div>
 <div id="hud"><div class="pill">SEVANT DRIVE</div><div class="pill">السرعة: <span id="speed">0</span> كم/س</div></div>
-<div id="hint">اضغط مطولًا على دواسة الوقود للقيادة</div>
+<div id="hint">مدينة SEVANT • اضغط مطولًا على دواسة الوقود للقيادة</div>
 <div id="controls">
  <div class="group"><button class="ctrl" id="left">◀</button><button class="ctrl" id="right">▶</button></div>
  <div class="group"><button class="ctrl" id="brake">▼</button><button class="ctrl go" id="gas">▲</button></div>
@@ -40,16 +40,35 @@ const camera=new THREE.PerspectiveCamera(62,innerWidth/innerHeight,.1,300); came
 const renderer=new THREE.WebGLRenderer({antialias:true,alpha:false}); renderer.setPixelRatio(Math.min(devicePixelRatio,1.7)); renderer.setSize(innerWidth,innerHeight); renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap; renderer.outputColorSpace=THREE.SRGBColorSpace; root.appendChild(renderer.domElement);
 scene.add(new THREE.HemisphereLight(0xb8e4ff,0x22202b,2.1));
 const moon=new THREE.DirectionalLight(0xd6e7ff,2.4); moon.position.set(-5,12,7); moon.castShadow=true; scene.add(moon);
-const roadMat=new THREE.MeshStandardMaterial({color:0x252b35,roughness:.9});
-const road=new THREE.Mesh(new THREE.PlaneGeometry(13,260),roadMat); road.rotation.x=-Math.PI/2; road.position.set(0,-.04,-70); road.receiveShadow=true; scene.add(road);
-const ground=new THREE.Mesh(new THREE.PlaneGeometry(220,300),new THREE.MeshStandardMaterial({color:0x101d28}));ground.rotation.x=-Math.PI/2;ground.position.set(0,-.12,-65);scene.add(ground);
-const lineMat=new THREE.MeshBasicMaterial({color:0xd4e8ee});
+const roadMat=new THREE.MeshStandardMaterial({color:0x252b35,roughness:.95});
+const sidewalkMat=new THREE.MeshStandardMaterial({color:0x777f88,roughness:1});
+const ground=new THREE.Mesh(new THREE.PlaneGeometry(320,420),new THREE.MeshStandardMaterial({color:0x182b2b,roughness:1}));ground.rotation.x=-Math.PI/2;ground.position.set(0,-.16,-100);scene.add(ground);
+// Main avenue, wide enough for a more open driving feel
+const road=new THREE.Mesh(new THREE.PlaneGeometry(18,360),roadMat);road.rotation.x=-Math.PI/2;road.position.set(0,-.04,-100);road.receiveShadow=true;scene.add(road);
 const marks=[];
-for(let z=-180;z<20;z+=12){let m=new THREE.Mesh(new THREE.BoxGeometry(.12,.025,5),lineMat);m.position.set(0,.015,z);scene.add(m);marks.push(m)}
-for(let x of [-6.2,6.2]){let edge=new THREE.Mesh(new THREE.BoxGeometry(.13,.03,260),new THREE.MeshBasicMaterial({color:0x00cfff}));edge.position.set(x,.015,-70);scene.add(edge)}
-// Night city blocks
+for(let z=-340;z<25;z+=12){let m=new THREE.Mesh(new THREE.BoxGeometry(.14,.025,5),new THREE.MeshBasicMaterial({color:0xd4e8ee}));m.position.set(0,.015,z);scene.add(m);marks.push(m)}
+// Road edges and sidewalks
+for(let x of [-9.2,9.2]){let edge=new THREE.Mesh(new THREE.BoxGeometry(.16,.04,360),new THREE.MeshStandardMaterial({color:0x00cfff,emissive:0x003344}));edge.position.set(x,.02,-100);scene.add(edge);let walk=new THREE.Mesh(new THREE.BoxGeometry(4,.12,360),sidewalkMat);walk.position.set(x*1.28,-.02,-100);scene.add(walk)}
+// Cross streets repeat as the car drives, creating the feeling of a connected city grid
+const crossRoads=[];
+for(let z=-330;z<40;z+=72){let r=new THREE.Mesh(new THREE.PlaneGeometry(88,15),roadMat);r.rotation.x=-Math.PI/2;r.position.set(0,-.035,z);scene.add(r);crossRoads.push(r);for(let x=-38;x<=38;x+=4){let stripe=new THREE.Mesh(new THREE.BoxGeometry(2,.025,.32),new THREE.MeshBasicMaterial({color:0xe7edf0}));stripe.position.set(x,.012,z-7.8);scene.add(stripe)}}
+// City blocks: varied buildings, glowing windows, trees and street lamps on both sides
 const buildings=[];
-for(let side of [-1,1])for(let i=0;i<34;i++){let h=4+Math.random()*22,w=2+Math.random()*4,d=3+Math.random()*6;let mat=new THREE.MeshStandardMaterial({color:new THREE.Color().setHSL(.58+Math.random()*.08,.22,.12+Math.random()*.12),emissive:0x091c31,roughness:.9});let b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);b.position.set(side*(11+Math.random()*22),h/2,-i*8-10);scene.add(b);buildings.push({b,side,h,w,d});for(let j=0;j<Math.floor(h/2);j++){let win=new THREE.Mesh(new THREE.BoxGeometry(.09,.18,.09),new THREE.MeshBasicMaterial({color:Math.random()>.45?0x55cfff:0xffc76b}));win.position.set(b.position.x-side*(w/2+.06),1+j*1.5,b.position.z+(Math.random()-.5)*d);scene.add(win)}}
+const trees=[];
+for(let side of [-1,1])for(let i=0;i<42;i++){
+ let h=5+Math.random()*24,w=3+Math.random()*7,d=4+Math.random()*7;
+ let x=side*(15+Math.random()*27),z=-i*9-12;
+ let mat=new THREE.MeshStandardMaterial({color:new THREE.Color().setHSL(.56+Math.random()*.1,.22,.13+Math.random()*.12),emissive:0x091c31,roughness:.9});
+ let b=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);b.position.set(x,h/2,z);scene.add(b);buildings.push({b,side,h,w,d});
+ // Windows on the street-facing side
+ for(let floor=0;floor<Math.floor(h/2.5);floor++)for(let wi=0;wi<Math.max(1,Math.floor(w/1.8));wi++){
+  if(Math.random()<.28)continue;
+  let win=new THREE.Mesh(new THREE.BoxGeometry(.12,.25,.08),new THREE.MeshBasicMaterial({color:Math.random()>.45?0x55cfff:0xffc76b}));
+  win.position.set(x-side*(w/2+.045),1.2+floor*2.2,z-w/2+wi*1.7);scene.add(win);
+ }
+ // Small trees beside the pavement
+ if(i%2===0){let tx=side*(11.5+Math.random()*1.4),tz=z-3;let trunk=new THREE.Mesh(new THREE.CylinderGeometry(.12,.16,1.5,6),new THREE.MeshStandardMaterial({color:0x59412d}));trunk.position.set(tx,.7,tz);scene.add(trunk);let crown=new THREE.Mesh(new THREE.SphereGeometry(.8,7,6),new THREE.MeshStandardMaterial({color:0x24734d,roughness:1}));crown.position.set(tx,1.9,tz);scene.add(crown);trees.push({trunk,crown});}
+}
 const carGroup=new THREE.Group();scene.add(carGroup);
 let carLoaded=false;
 new GLTFLoader().load('./سيارة.glb',g=>{
@@ -71,8 +90,10 @@ function animate(){requestAnimationFrame(animate);let dt=Math.min(clock.getDelta
  if(inputs.brake)speed=Math.max(0,speed-34*dt);
  const dir=(inputs.left?1:0)-(inputs.right?1:0); steer=THREE.MathUtils.lerp(steer,dir,.09);carGroup.position.x=THREE.MathUtils.clamp(carGroup.position.x+steer*speed*.035,-4.5,4.5);
  carGroup.rotation.y=THREE.MathUtils.lerp(carGroup.rotation.y,-steer*.08,.08);
- for(const m of marks){m.position.z+=speed*dt;if(m.position.z>12)m.position.z=-185}
- for(const o of buildings){o.b.position.z+=speed*dt*.65;if(o.b.position.z>15)o.b.position.z=-260}
+ for(const m of marks){m.position.z+=speed*dt;if(m.position.z>18)m.position.z=-345}
+ for(const r of crossRoads){r.position.z+=speed*dt*.75;if(r.position.z>24)r.position.z-=360}
+ for(const o of buildings){o.b.position.z+=speed*dt*.65;if(o.b.position.z>18)o.b.position.z=-365}
+ for(const t of trees){t.trunk.position.z+=speed*dt*.65;t.crown.position.z+=speed*dt*.65;if(t.trunk.position.z>18){t.trunk.position.z-=378;t.crown.position.z-=378}}
  camera.position.x=THREE.MathUtils.lerp(camera.position.x,carGroup.position.x*.35,.05);camera.lookAt(carGroup.position.x*.3,1,-5);
  document.getElementById('speed').textContent=Math.round(speed*4);
  renderer.render(scene,camera);

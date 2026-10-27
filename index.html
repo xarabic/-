@@ -3,163 +3,133 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#07111f">
+<meta name="theme-color" content="#07101d">
 <title>SEVANT Browser</title>
 <style>
-:root{--bg:#07111f;--panel:#101d30;--panel2:#14243a;--line:#243650;--text:#eef6ff;--muted:#93a8c2;--cyan:#36d7ee;--blue:#4388ff;--danger:#ff6b7b}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#112844 0,#07111f 55%);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;min-height:100vh}
-button,input{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
-.shell{max-width:1000px;margin:auto;padding:20px 14px 50px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:11px}.logo{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,var(--cyan),var(--blue));color:#061321;font-weight:1000;font-size:20px;box-shadow:0 8px 28px #36d7ee30}.brand h1{font-size:20px;margin:0;letter-spacing:1px}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}.btn{border:1px solid var(--line);border-radius:13px;background:var(--panel2);color:var(--text);padding:10px 13px}.btn.primary{border:0;color:#051321;background:linear-gradient(120deg,var(--cyan),#73a7ff);font-weight:800}.btn:disabled{opacity:.55;cursor:not-allowed}.account{display:flex;align-items:center;gap:8px}.avatar{width:30px;height:30px;border-radius:50%;object-fit:cover;background:#22334b}.hero{padding:30px 18px 24px;text-align:center;border:1px solid #29435e;border-radius:25px;background:linear-gradient(145deg,#12243aee,#0a1728f5);box-shadow:0 18px 60px #0003}.eyebrow{color:var(--cyan);font-size:12px;font-weight:800;letter-spacing:2px}.hero h2{font-size:clamp(28px,6vw,44px);margin:10px 0 8px}.hero h2 span{color:var(--cyan)}.hero p{color:var(--muted);margin:0 auto 22px;max-width:520px;line-height:1.7}.search{display:flex;gap:8px;max-width:680px;margin:auto;padding:7px;background:#07111f;border:1px solid #31465f;border-radius:17px}.search input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--text);padding:10px 9px;direction:ltr;text-align:left}.search button{white-space:nowrap}.hint{font-size:12px;color:var(--muted);margin-top:12px}.section{margin-top:26px}.section-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px;gap:10px}.section h3{font-size:16px;margin:0}.sub{color:var(--muted);font-size:12px}.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.tile{border:1px solid var(--line);border-radius:17px;background:#0e1b2d;padding:17px 8px;text-align:center;color:var(--text);text-decoration:none;display:block;min-width:0}.tile:hover{border-color:var(--cyan);transform:translateY(-1px)}.tile .glyph{width:43px;height:43px;border-radius:14px;margin:0 auto 9px;display:grid;place-items:center;background:#1b3048;font-size:21px}.tile strong{display:block;font-size:13px}.tile small{display:block;color:var(--muted);font-size:10px;margin-top:4px;overflow:hidden;text-overflow:ellipsis}.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}.card{background:#0e1b2d;border:1px solid var(--line);border-radius:18px;padding:17px}.card h3{margin:0 0 7px}.card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 12px}.row{display:flex;gap:8px;align-items:center}.row input{width:100%;min-width:0;background:#07111f;border:1px solid var(--line);border-radius:11px;color:var(--text);padding:11px;direction:ltr}.list{display:grid;gap:8px}.listitem{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;background:#13243a}.listitem a{color:var(--text);text-decoration:none;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:ltr;text-align:left}.smallbtn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:9px;padding:6px 8px}.empty{color:var(--muted);font-size:13px;padding:12px 0}.status{margin-top:18px;border:1px solid var(--line);border-radius:14px;padding:12px 14px;color:var(--muted);font-size:12px;line-height:1.7}.status strong{color:var(--text)}.foot{text-align:center;color:#7388a3;font-size:11px;margin-top:25px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#182b42;border:1px solid #3d5875;border-radius:12px;padding:11px 15px;max-width:90vw;box-shadow:0 10px 40px #0008;z-index:10;display:none}.toast.show{display:block}.hidden{display:none!important}
-@media(max-width:600px){.shell{padding:14px 11px 35px}.brand h1{font-size:17px}.top{align-items:flex-start}.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.cards{grid-template-columns:1fr}.hero{padding:25px 13px 21px}.account .btn{padding:8px}.section-head{align-items:flex-start}}
+:root{--bg:#07101d;--surface:#0d1a2a;--surface2:#12243a;--surface3:#192e47;--line:#243c57;--text:#f2f7ff;--muted:#8fa7c2;--cyan:#40e0ed;--blue:#5b8cff;--pink:#b57cff;--shadow:0 14px 35px #0004}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}body{background:radial-gradient(ellipse at 50% -15%,#183858 0,transparent 48%),var(--bg)}button,input{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,input:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.app{max-width:780px;margin:auto;min-height:100dvh;padding:env(safe-area-inset-top) 12px calc(88px + env(safe-area-inset-bottom));position:relative}.topbar{height:68px;display:flex;align-items:center;justify-content:space-between;gap:10px}.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(135deg,var(--cyan),var(--blue) 60%,var(--pink));display:grid;place-items:center;color:#07101d;font-weight:1000;font-size:21px;box-shadow:0 7px 22px #40e0ed25}.brandname{font-size:17px;font-weight:900;letter-spacing:.8px}.brandname span{color:var(--cyan)}.subtitle{font-size:10px;color:var(--muted);margin-top:2px}.round{width:41px;height:41px;border:1px solid var(--line);background:#0d1a2acc;border-radius:14px;display:grid;place-items:center;font-size:19px}.address{display:flex;align-items:center;gap:8px;padding:7px;background:#0d1a2a;border:1px solid #29425e;border-radius:17px;box-shadow:var(--shadow)}.lock{padding:0 4px;color:var(--cyan);font-size:16px}.address input{min-width:0;flex:1;background:transparent;border:0;color:var(--text);outline:none;padding:10px 2px;direction:ltr;text-align:left;font-size:14px}.go{border:0;border-radius:12px;background:linear-gradient(120deg,var(--cyan),#83b7ff);color:#07101d;font-weight:900;padding:10px 14px}.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.quickbtn{border:1px solid var(--line);border-radius:17px;background:linear-gradient(160deg,#12243a,#0d1a2a);padding:12px 4px 10px;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}.quickicon{height:43px;width:43px;border-radius:14px;background:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;color:#202b3a}.quickicon.google{color:#4285f4;font-size:24px}.quickicon.yt{color:#f00}.quickicon.tt{background:#050505;color:#fff}.quickicon.wiki{background:#f1f5f9;color:#172033}.quickbtn span:last-child{font-size:11px;color:#c7d5e6}.sectiontitle{display:flex;align-items:center;justify-content:space-between;margin:20px 2px 10px}.sectiontitle h2{font-size:14px;margin:0}.sectiontitle small{font-size:10px;color:var(--muted)}.hero{border:1px solid #2d4a69;border-radius:22px;padding:20px;background:radial-gradient(circle at 100% 0,#1a4660 0,transparent 48%),linear-gradient(145deg,#122940,#0d1a2a 75%);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:130px;height:130px;border-radius:50%;border:1px solid #4be2ef24;left:-45px;bottom:-75px;box-shadow:0 0 0 18px #4be2ef0a,0 0 0 38px #4be2ef08}.hero h2{font-size:21px;line-height:1.4;margin:0 0 8px}.hero h2 span{color:var(--cyan)}.hero p{font-size:12px;line-height:1.9;color:#a8bdd2;margin:0;max-width:380px}.heroactions{display:flex;gap:8px;margin-top:15px;flex-wrap:wrap}.pill{border:1px solid #355674;background:#17324a;border-radius:12px;padding:9px 12px;font-size:11px}.pill.main{border:0;background:linear-gradient(120deg,var(--cyan),#8ab8ff);color:#061321;font-weight:900}.tip{font-size:11px;color:var(--muted);line-height:1.8;margin:13px 3px}.browserpage{display:none}.browserpage.active{display:block}.view{margin-top:14px;border:1px solid var(--line);border-radius:19px;overflow:hidden;background:#0b1726}.viewtop{height:44px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#102138;border-bottom:1px solid var(--line)}.traffic{display:flex;gap:4px}.traffic i{width:6px;height:6px;border-radius:50%;background:#56718c}.viewurl{flex:1;direction:ltr;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;color:var(--muted)}.viewstatus{font-size:10px;color:var(--cyan)}.webarea{height:min(61dvh,680px);min-height:350px;background:#fff;position:relative}.webarea iframe{width:100%;height:100%;border:0;background:#fff;display:block}.emptyview{position:absolute;inset:0;background:radial-gradient(ellipse at top,#173c58,#091625 70%);display:flex;align-items:center;justify-content:center;text-align:center;padding:23px;color:var(--text)}.emptyview .inner{max-width:420px}.globe{width:72px;height:72px;margin:0 auto 17px;border-radius:24px;background:linear-gradient(135deg,#40e0ed,#638dff);color:#07101d;display:grid;place-items:center;font-size:34px;box-shadow:0 10px 30px #40e0ed25}.emptyview h3{margin:0 0 8px;font-size:19px}.emptyview p{margin:0;color:#9fb4ca;font-size:12px;line-height:1.9}.warning{margin:12px 0;padding:13px 14px;border:1px solid #2a425e;background:#0d1a2a;border-radius:15px;font-size:11px;line-height:1.9;color:#9fb2c8}.warning b{color:#e7f4ff}.tabstrip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:14px 0 10px}.tab{border:1px solid var(--line);background:#0d1a2a;border-radius:13px;padding:9px 2px;min-width:0;color:var(--muted)}.tab .tabicon{display:block;font-size:15px;margin-bottom:4px}.tab .tabname{display:block;font-size:10px}.tab .tabhost{display:block;font-size:8px;direction:ltr;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 3px;margin-top:4px}.tab.active{border-color:var(--cyan);background:linear-gradient(150deg,#173b50,#11253b);color:var(--text);box-shadow:inset 0 0 0 1px #40e0ed18}.tab.active .tabicon{color:var(--cyan)}.sharebtn{width:100%;border:0;border-radius:14px;padding:12px;background:linear-gradient(110deg,#40e0ed,#7eabff);color:#07101d;font-weight:900;font-size:12px}.bottomnav{position:fixed;bottom:0;left:0;right:0;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#081321eF;backdrop-filter:blur(18px);border-top:1px solid #20364f;z-index:10}.bottominner{max-width:600px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.navitem{border:0;background:transparent;color:#8097b1;border-radius:13px;padding:7px 3px;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:10px}.navitem .navicon{font-size:19px;line-height:1}.navitem.active{color:var(--cyan);background:#173047}.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:30;background:#18314a;border:1px solid #3c5c7b;border-radius:13px;padding:11px 14px;box-shadow:var(--shadow);font-size:12px;max-width:90vw;display:none}.toast.show{display:block}.hidden{display:none!important}.externalbutton{margin-top:9px;width:100%;border:1px solid var(--line);border-radius:13px;padding:11px;background:#12243a;font-size:12px}.historylist{display:grid;gap:8px}.historyitem{border:1px solid var(--line);background:var(--surface);border-radius:13px;padding:13px;text-align:right;display:flex;justify-content:space-between;gap:10px}.historyitem small{display:block;color:var(--muted);direction:ltr;text-align:left;margin-top:5px}.settingscard{border:1px solid var(--line);background:var(--surface);border-radius:17px;padding:15px;margin-bottom:10px}.settingscard h3{font-size:14px;margin:0 0 8px}.settingscard p{font-size:12px;color:var(--muted);line-height:1.9;margin:0}
+@media(min-width:700px){.app{padding-top:16px}.hero{padding:26px}.hero h2{font-size:25px}.quickbtn{padding:16px}.webarea{height:68vh}.tab{padding:12px 5px}}
+
+/* Google Programmable Search results */
+.gsearch-wrap{display:none;margin-top:14px;padding:12px;border:1px solid var(--line);border-radius:17px;background:#fff;color:#172033;overflow:hidden}
+.gsearch-wrap.active{display:block}
+.gsearch-title{font-size:12px;font-weight:800;color:#172033;margin:0 0 8px}
+.gsearch-note{font-size:10px;color:#526174;line-height:1.7;margin:8px 0 0}
+.gsearch-wrap .gsc-control-cse{padding:0!important;border:0!important;background:transparent!important;font-family:Arial,sans-serif!important}
+.gsearch-wrap .gsc-search-box{margin-bottom:10px!important}
+.gsearch-wrap .gsc-results-wrapper-overlay{position:static!important;width:auto!important}
+.gsearch-wrap .gsc-results{width:100%!important}
 </style>
+<script>window.__gcse = {callback: function(){ window.sevantGoogleSearchReady = true; }};</script>
+<script async src="https://cse.google.com/cse.js?cx=f1aef1d736e3e4523"></script>
 </head>
 <body>
-<div class="shell">
-  <header class="top">
-    <div class="brand"><div class="logo">S</div><div><h1>SEVANT <span style="color:#36d7ee">BROWSER</span></h1><p>مساحتك للوصول إلى الإنترنت</p></div></div>
-    <div class="account">
-      <img id="avatar" class="avatar hidden" alt="صورة الحساب">
-      <button id="signIn" class="btn" type="button">الدخول بحساب Google</button>
-      <button id="signOut" class="btn hidden" type="button">خروج</button>
-    </div>
-  </header>
+<main class="app">
+<header class="topbar">
+ <div class="brand"><div class="logo">S</div><div><div class="brandname">SEVANT <span>BROWSER</span></div><div class="subtitle">متصفحك. عالمك. مكان واحد.</div></div></div>
+ <button class="round" id="newTabBtn" aria-label="تبويب جديد" title="تبويب جديد">＋</button>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="eyebrow">YOUR WEB. YOUR WAY.</div>
-      <h2>اكتشف الإنترنت مع <span>SEVANT</span></h2>
-      <p>ابحث عن أي شيء أو اكتب عنوان الموقع. يمكنك حفظ مواقعك المفضلة والعودة إليها بسرعة.</p>
-      <form id="searchForm" class="search">
-        <input id="address" type="text" autocomplete="url" placeholder="ابحث في Google أو اكتب عنوان موقع..." aria-label="بحث أو عنوان موقع">
-        <button class="btn primary" type="submit">اذهب ↗</button>
-      </form>
-      <div class="hint">مثال: youtube.com أو اكتب عبارة للبحث في Google</div>
-    </section>
+<section id="homePage" class="browserpage active">
+ <form class="address" id="searchForm"><span class="lock">⌕</span><input id="addressInput" placeholder="ابحث أو أدخل عنوان موقع..." autocomplete="url" aria-label="ابحث أو أدخل عنوان موقع"><button class="go" type="submit">اذهب</button></form>
+ <div class="quick">
+  <button class="quickbtn" data-go="SEARCH:Google" type="button"><span class="quickicon google">G</span><span>Google</span></button>
+  <button class="quickbtn" data-go="https://www.youtube.com/" type="button"><span class="quickicon yt">▶</span><span>YouTube</span></button>
+  <button class="quickbtn" data-go="https://www.tiktok.com/" type="button"><span class="quickicon tt">♪</span><span>TikTok</span></button>
+  <button class="quickbtn" data-go="https://www.wikipedia.org/" type="button"><span class="quickicon wiki">W</span><span>Wikipedia</span></button>
+ </div>
+ <section class="hero">
+  <h2>اكتشف الإنترنت مع <span>SEVANT</span></h2>
+  <p>ابحث، افتح المواقع، وبدّل بين خمسة تبويبات من واجهة واحدة مصممة للهاتف.</p>
+  <div class="heroactions"><button class="pill main" id="startBtn" type="button">ابدأ التصفح ↗</button><button class="pill" id="tabsJump" type="button">عرض التبويبات ▦</button></div>
+ </section>
+ <div class="sectiontitle"><h2>تبويباتك</h2><small>5 أماكن للتصفح</small></div>
+ <div class="tabstrip" id="homeTabs">
+  <button class="tab active" data-tab="0" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 1</span><span class="tabhost">الرئيسية</span></button>
+  <button class="tab" data-tab="1" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 2</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="2" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 3</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="3" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 4</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="4" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 5</span><span class="tabhost">فارغ</span></button>
+ </div>
+ <p class="tip">💡 اكتب عنوان الموقع أو عبارة البحث في الشريط بالأعلى. ستظهر الصفحات التي تسمح بالتضمين داخل المتصفح.</p>
+</section>
 
-    <section class="section">
-      <div class="section-head"><h3>اختصارات سريعة</h3><span class="sub">افتح المواقع في المتصفح</span></div>
-      <div class="tiles">
-        <a class="tile" href="https://www.google.com/" target="_blank" rel="noopener noreferrer"><div class="glyph">🔎</div><strong>Google</strong><small>بحث الويب</small></a>
-        <a class="tile" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"><div class="glyph">▶️</div><strong>YouTube</strong><small>الفيديوهات</small></a>
-        <a class="tile" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer"><div class="glyph">♪</div><strong>TikTok</strong><small>المقاطع القصيرة</small></a>
-        <a class="tile" href="https://mail.google.com/" target="_blank" rel="noopener noreferrer"><div class="glyph">✉️</div><strong>Gmail</strong><small>البريد الإلكتروني</small></a>
-      </div>
-    </section>
+<section id="browserPage" class="browserpage">
+ <form class="address" id="searchForm2"><span class="lock">⌕</span><input id="addressInput2" placeholder="ابحث أو أدخل عنوان موقع..." autocomplete="url" aria-label="عنوان الموقع"><button class="go" type="submit">اذهب</button></form>
+ <div id="googleSearchWrap" class="gsearch-wrap"><p class="gsearch-title">بحث Google داخل SEVANT</p><div class="gcse-search" data-gname="sevants"></div><p class="gsearch-note">النتائج من Google Programmable Search. قد تظهر إعلانات أو قيود حسب إعدادات محرّك البحث.</p></div>
+ <div class="view" id="siteView">
 
-    <section class="section cards">
-      <div class="card">
-        <h3>⭐ المواقع المفضلة</h3>
-        <p>أضف موقعًا إلى قائمتك للوصول إليه لاحقًا على هذا الجهاز.</p>
-        <form id="bookmarkForm" class="row">
-          <input id="bookmarkUrl" placeholder="https://example.com" aria-label="رابط الموقع المراد حفظه">
-          <button class="btn primary" type="submit">حفظ</button>
-        </form>
-        <div id="bookmarks" class="list" style="margin-top:12px"></div>
-      </div>
-      <div class="card">
-        <h3>🕘 آخر عمليات البحث</h3>
-        <p>سجل محلي للروابط التي فتحتها من هذه الصفحة.</p>
-        <div id="history" class="list"></div>
-        <button id="clearHistory" class="smallbtn" style="margin-top:10px">مسح السجل</button>
-      </div>
-    </section>
+  <div class="viewtop"><span class="traffic"><i></i><i></i><i></i></span><span id="viewUrl" class="viewurl">sev ant://home</span><span id="viewState" class="viewstatus">جاهز</span></div>
+  <div class="webarea">
+   <iframe id="webFrame" title="الموقع داخل SEVANT" class="hidden" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; clipboard-read; clipboard-write" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+   <div id="emptyView" class="emptyview"><div class="inner"><div class="globe">◎</div><h3>ابدأ التصفح</h3><p>أدخل رابطًا أو كلمة بحث بالأعلى. إذا كان الموقع يسمح بالتضمين، سيظهر هنا داخل SEVANT.</p></div></div>
+   <div id="blockedView" class="emptyview hidden"><div class="inner"><div class="globe">↗</div><h3>قد يمنع الموقع عرضه هنا</h3><p>بعض المواقع تمنع فتح صفحاتها داخل إطارات مواقع أخرى. لا يمكن للصفحة تجاوز هذا القيد. يمكنك تجربة فتحه خارجيًا عند الضرورة.</p><button id="blockedOpen" class="externalbutton" type="button">فتح في المتصفح الخارجي ↗</button></div></div>
+  </div>
+ </div>
+ <div class="sectiontitle"><h2>التبويبات المفتوحة</h2><small id="tabCounter">1 / 5</small></div>
+ <div class="tabstrip" id="browserTabs">
+  <button class="tab active" data-tab="0" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 1</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="1" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 2</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="2" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 3</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="3" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 4</span><span class="tabhost">فارغ</span></button>
+  <button class="tab" data-tab="4" type="button"><span class="tabicon">▣</span><span class="tabname">تبويب 5</span><span class="tabhost">فارغ</span></button>
+ </div>
+ <button id="shareTabs" class="sharebtn" type="button">مشاركة الرابط الحالي على التبويبات الخمسة</button>
+ <button id="openExternal" class="externalbutton" type="button">فتح الصفحة خارجيًا إذا لزم ↗</button>
+ <div class="warning"><b>معلومة مهمة:</b> هذا متصفح ويب داخل موقع، وليس محرك متصفح مستقلًا مثل Chrome. بعض المواقع تمنع عرضها داخل iframe؛ تسجيل الدخول للمواقع الخارجية وتشغيل الفيديو تلقائيًا في كل التبويبات غير مضمون.</div>
+</section>
 
-    <div class="status" id="accountStatus"><strong>الحساب:</strong> لم تسجّل الدخول بعد. يمكنك استخدام البحث والاختصارات دون حساب.</div>
-    <div class="status"><strong>ملاحظة حول التصفح:</strong> هذه نسخة ويب من SEVANT وليست محرك متصفح مستقلًا. المواقع تُفتح في تبويب جديد بالمتصفح الحالي. بعض المواقع تمنع العرض داخل صفحات أخرى؛ ولتجربة متصفح كامل مع تبويبات وجلسات دخول مستقلة، يلزم إنشاء تطبيق Android أصلي.</div>
-  </main>
-  <footer class="foot">SEVANT Browser · نسخة أولية · لا نطلب كلمة مرور Google منك</footer>
-</div>
+<section id="historyPage" class="browserpage">
+ <div class="sectiontitle"><h2>آخر المواقع</h2><small>محفوظة على هذا الجهاز</small></div>
+ <div id="historyList" class="historylist"></div>
+ <button id="clearHistory" class="externalbutton" type="button">مسح السجل</button>
+</section>
+
+<section id="settingsPage" class="browserpage">
+ <div class="hero"><h2>إعدادات <span>SEVANT</span></h2><p>تحكم بسيط بتجربة التصفح الخاصة بك.</p></div>
+ <div class="settingscard"><h3>الخصوصية</h3><p>سجل التصفح في هذه النسخة محفوظ محليًا في متصفح جهازك. لا تكتب كلمات مرور حساسة في صفحات غير موثوقة.</p></div>
+ <div class="settingscard"><h3>حدود التصفح الداخلي</h3><p>تعمل هذه النسخة باستخدام iframe. المواقع التي ترسل سياسة منع التضمين (مثل X-Frame-Options أو Content-Security-Policy) قد لا تظهر، ولا يمكن تجاوز ذلك بأمان من HTML فقط.</p></div>
+ <div class="settingscard"><h3>تسجيل الدخول</h3><p>تسجيل الدخول بحساب Google غير مفعّل في هذه النسخة. يمكن إضافته لاحقًا بعد ضبط Firebase، لكنه لن يجعل المواقع الخارجية تسمح بالتضمين تلقائيًا.</p></div>
+</section>
+
+</main>
+<nav class="bottomnav"><div class="bottominner">
+ <button class="navitem active" data-page="homePage" type="button"><span class="navicon">⌂</span><span>الرئيسية</span></button>
+ <button class="navitem" data-page="browserPage" type="button"><span class="navicon">◎</span><span>تصفح</span></button>
+ <button class="navitem" data-page="historyPage" type="button"><span class="navicon">◷</span><span>السجل</span></button>
+ <button class="navitem" data-page="settingsPage" type="button"><span class="navicon">⚙</span><span>الإعدادات</span></button>
+</div></nav>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
-
-<!-- Firebase Auth: ضع إعدادات مشروع Firebase في ملف firebase-config.js قبل النشر -->
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-
-const $ = (id) => document.getElementById(id);
-const toast = (message) => { const el=$("toast"); el.textContent=message; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),3200); };
-const safeRead = (key, fallback=[]) => { try { const v=JSON.parse(localStorage.getItem(key)||"null"); return Array.isArray(v)?v:fallback; } catch { return fallback; } };
-const normalizeUrl = (raw) => {
-  let value=(raw||"").trim();
-  if(!value) return null;
-  if(/\s/.test(value) && !/^(https?:\/\/)/i.test(value)) return "https://www.google.com/search?q="+encodeURIComponent(value);
-  if(!/^[a-zA-Z][a-zA-Z\d+.-]*:/.test(value)) {
-    if(value==="localhost" || value.includes(".") || value.startsWith("127.0.0.1")) value="https://"+value;
-    else return "https://www.google.com/search?q="+encodeURIComponent(value);
-  }
-  try { const u=new URL(value); if(!["http:","https:"].includes(u.protocol)) return null; return u.href; } catch { return null; }
-};
-let historyItems=safeRead("sev_browser_history");
-let bookmarks=safeRead("sev_browser_bookmarks");
-function save(key,value){try{localStorage.setItem(key,JSON.stringify(value));}catch{}}
-function openUrl(raw){
-  const url=normalizeUrl(raw);
-  if(!url){toast("اكتب عنوان موقع صحيحًا أو عبارة للبحث.");return;}
-  historyItems=[{url,at:Date.now()},...historyItems.filter(x=>x.url!==url)].slice(0,12);
-  save("sev_browser_history",historyItems); renderHistory();
-  const win=window.open(url,"_blank","noopener,noreferrer");
-  if(!win) toast("قد يكون فتح التبويب محظورًا. اسمح بالنوافذ المنبثقة لهذا الموقع.");
-}
-$("searchForm").addEventListener("submit",e=>{e.preventDefault();openUrl($("address").value);});
-$("bookmarkForm").addEventListener("submit",e=>{
-  e.preventDefault(); const url=normalizeUrl($("bookmarkUrl").value);
-  if(!url){toast("أدخل رابطًا صحيحًا.");return;}
-  if(bookmarks.some(x=>x.url===url)){toast("هذا الموقع محفوظ بالفعل.");return;}
-  bookmarks=[{url,title:new URL(url).hostname},...bookmarks].slice(0,30);
-  save("sev_browser_bookmarks",bookmarks);$("bookmarkUrl").value="";renderBookmarks();toast("تم حفظ الموقع على هذا الجهاز.");
-});
-function renderBookmarks(){
- const root=$("bookmarks");root.replaceChildren();
- if(!bookmarks.length){root.innerHTML='<div class="empty">لا توجد مواقع محفوظة بعد.</div>';return;}
- bookmarks.forEach((b,i)=>{
-  const row=document.createElement("div");row.className="listitem";
-  const a=document.createElement("a");a.href=b.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=b.title||b.url;
-  const del=document.createElement("button");del.className="smallbtn";del.textContent="حذف";del.type="button";del.onclick=()=>{bookmarks.splice(i,1);save("sev_browser_bookmarks",bookmarks);renderBookmarks();};
-  row.append(a,del);root.append(row);
- });
-}
-function renderHistory(){
- const root=$("history");root.replaceChildren();
- if(!historyItems.length){root.innerHTML='<div class="empty">لا يوجد سجل بعد.</div>';return;}
- historyItems.slice(0,6).forEach(h=>{
-  const row=document.createElement("div");row.className="listitem";
-  const a=document.createElement("a");a.href=h.url;a.target="_blank";a.rel="noopener noreferrer";a.textContent=h.url;
-  row.append(a);root.append(row);
- });
-}
-$("clearHistory").addEventListener("click",()=>{historyItems=[];save("sev_browser_history",historyItems);renderHistory();toast("تم مسح السجل المحلي.");});
-renderBookmarks();renderHistory();
-
-const firebaseConfig = window.SEVANT_FIREBASE_CONFIG;
-if(!firebaseConfig || !firebaseConfig.apiKey || String(firebaseConfig.apiKey).includes("YOUR_")){
- $("signIn").addEventListener("click",()=>toast("تسجيل Google يحتاج إعداد Firebase الخاص بك. راجع ملف README داخل المشروع."));
- $("accountStatus").innerHTML="<strong>الحساب:</strong> تسجيل Google غير مفعّل بعد. أضف إعدادات Firebase إلى firebase-config.js واتبع README.";
-} else {
- try{
-  const app=initializeApp(firebaseConfig);
-  const auth=getAuth(app);
-  const provider=new GoogleAuthProvider();
-  provider.setCustomParameters({prompt:"select_account"});
-  $("signIn").addEventListener("click",async()=>{
-   try{
-    if(/iPhone|iPad|Android/i.test(navigator.userAgent)) await signInWithRedirect(auth,provider);
-    else await signInWithPopup(auth,provider);
-   }catch(err){toast("تعذّر تسجيل الدخول: "+(err.code||"خطأ غير معروف"));}
-  });
-  $("signOut").addEventListener("click",async()=>{try{await signOut(auth);toast("تم تسجيل الخروج.");}catch{toast("تعذّر تسجيل الخروج.");}});
-  getRedirectResult(auth).catch(err=>toast("تعذّر إكمال تسجيل الدخول: "+(err.code||"خطأ")));
-  onAuthStateChanged(auth,user=>{
-   if(user){
-    $("signIn").classList.add("hidden");$("signOut").classList.remove("hidden");$("avatar").classList.remove("hidden");
-    $("avatar").src=user.photoURL||"";$("accountStatus").textContent="تم تسجيل الدخول بحساب Google: "+(user.displayName||user.email||"حسابك")+".";
-   }else{
-    $("signIn").classList.remove("hidden");$("signOut").classList.add("hidden");$("avatar").classList.add("hidden");$("avatar").removeAttribute("src");
-    $("accountStatus").textContent="الحساب: لم تسجّل الدخول بعد. يمكنك استخدام البحث والاختصارات دون حساب.";
-   }
-  });
- }catch(err){$("accountStatus").textContent="لم يتم تهيئة تسجيل الدخول. تحقق من إعدادات Firebase في README.";}
-}
+<script>
+(() => {
+ const $=id=>document.getElementById(id);
+ const tabs=Array.from({length:5},()=>({url:"",history:[]}));
+ let active=0, currentUrl="", visitHistory=[];
+ const toast=msg=>{const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove("show"),3000)};
+ function normalize(raw){let s=(raw||"").trim();if(!s)return "";if(/^SEARCH:/i.test(s))return "SEARCH:"+s.slice(7);if(!/^[a-z][a-z0-9+.-]*:/i.test(s)){if(s.includes(" ")||!s.includes("."))return "SEARCH:"+s;s="https://"+s}try{const u=new URL(s);return ["http:","https:"].includes(u.protocol)?u.href:""}catch{return ""}}
+ function runGoogleSearch(query){const q=(query||"").trim();if(!q){toast("اكتب عبارة للبحث في Google.");return}tabs[active].url="SEARCH:"+q;tabs[active].history.push(tabs[active].url);visitHistory.unshift({url:tabs[active].url,time:new Date().toLocaleString("ar")});visitHistory=visitHistory.slice(0,50);renderUrl();setPage("browserPage");const wrap=$("googleSearchWrap");wrap.classList.add("active");$("siteView").classList.add("hidden");$("viewUrl").textContent="Google Search: "+q;$("viewState").textContent="بحث Google";const execute=()=>{try{const el=window.google&&google.search&&google.search.cse&&google.search.cse.element&&google.search.cse.element.getElement("sevants");if(el){el.execute(q);return true}}catch(e){}return false};let tries=0;const timer=setInterval(()=>{tries++;if(execute()||tries>=20){clearInterval(timer);if(tries>=20&&!window.sevantGoogleSearchReady)toast("إذا لم يظهر البحث، حدّث الصفحة وتأكد من اتصال الإنترنت.")}},300)}
+ function embed(url){try{const u=new URL(url);let id="";if(u.hostname==="youtu.be")id=u.pathname.split("/").filter(Boolean)[0]||"";else if(/(^|\.)youtube\.com$/i.test(u.hostname)){if(u.pathname==="/watch")id=u.searchParams.get("v")||"";else if(/^\/(shorts|live|embed)\//.test(u.pathname))id=u.pathname.split("/")[2]||""}if(id)return "https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?rel=0&playsinline=1";return url}catch{return url}}
+ function host(url){if((url||"").startsWith("SEARCH:"))return "Google Search";try{return new URL(url).hostname.replace(/^www\./,"")}catch{return "الرئيسية"}}
+ function setPage(page){document.querySelectorAll(".browserpage").forEach(p=>p.classList.toggle("active",p.id===page));document.querySelectorAll(".navitem").forEach(b=>b.classList.toggle("active",b.dataset.page===page));if(page==="historyPage")renderHistory()}
+ function renderTabs(){document.querySelectorAll("[data-tab]").forEach(b=>{const i=Number(b.dataset.tab);b.classList.toggle("active",i===active);const h=b.querySelector(".tabhost");if(h)h.textContent=tabs[i].url?host(tabs[i].url):(i===active&&!tabs[i].url?"الرئيسية":"فارغ")});$("tabCounter").textContent=(active+1)+" / 5"}
+ function renderUrl(){currentUrl=tabs[active].url;$("addressInput").value=currentUrl.startsWith("SEARCH:")?currentUrl.slice(7):currentUrl;$("addressInput2").value=currentUrl.startsWith("SEARCH:")?currentUrl.slice(7):currentUrl;const isSearch=currentUrl.startsWith("SEARCH:");$("googleSearchWrap").classList.toggle("active",isSearch);$("siteView").classList.toggle("hidden",isSearch);$("viewUrl").textContent=isSearch?"Google Search: "+currentUrl.slice(7):(currentUrl||"sev ant://home");$("viewState").textContent?$("viewState").textContent=isSearch?"بحث Google":(currentUrl?"موقع":"جاهز"):null;$("webFrame").classList.toggle("hidden",!currentUrl||isSearch);$("emptyView").classList.toggle("hidden",!!currentUrl);$("blockedView").classList.add("hidden");if(!isSearch)$("webFrame").src=currentUrl?embed(currentUrl):"about:blank";renderTabs()}
+ function navigate(raw){const value=(raw||"").trim();if(!value){toast("اكتب رابطًا أو عبارة للبحث.");return}const url=normalize(value);if(!url){toast("تعذر قراءة الرابط أو عبارة البحث.");return}if(url.startsWith("SEARCH:")){runGoogleSearch(url.slice(7));return}tabs[active].url=url;tabs[active].history.push(url);visitHistory.unshift({url,time:new Date().toLocaleString("ar")});visitHistory=visitHistory.slice(0,50);renderUrl();setPage("browserPage")}
+ $("searchForm").addEventListener("submit",e=>{e.preventDefault();navigate($("addressInput").value)});
+ $("searchForm2").addEventListener("submit",e=>{e.preventDefault();navigate($("addressInput2").value)});
+ document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.go)));
+ document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{active=Number(b.dataset.tab);renderUrl();setPage("browserPage")}));
+ document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>setPage(b.dataset.page)));
+ $("newTabBtn").addEventListener("click",()=>{active=(active+1)%5;tabs[active].url="";tabs[active].history=[];renderUrl();setPage("browserPage");toast("تم فتح تبويب فارغ")});
+ $("startBtn").addEventListener("click",()=>{setPage("browserPage");$("addressInput2").focus()});
+ $("tabsJump").addEventListener("click",()=>{setPage("browserPage");$("browserTabs").scrollIntoView({behavior:"smooth",block:"center"})});
+ $("shareTabs").addEventListener("click",()=>{const url=tabs[active].url;if(!url){toast("افتح موقعًا أولًا ثم شارك رابطه.");return}tabs.forEach(t=>{t.url=url;t.history.push(url)});renderUrl();toast("تم وضع الرابط في التبويبات الخمسة. العرض قد يعتمد على سياسة الموقع.")});
+ $("openExternal").addEventListener("click",()=>{if(!currentUrl){toast("لا يوجد موقع مفتوح.");return}if(currentUrl.startsWith("SEARCH:")){window.open("https://www.google.com/search?q="+encodeURIComponent(currentUrl.slice(7)),"_blank","noopener,noreferrer");return}window.open(currentUrl,"_blank","noopener,noreferrer")});
+ $("blockedOpen").addEventListener("click",()=>{if(currentUrl&&!currentUrl.startsWith("SEARCH:"))window.open(currentUrl,"_blank","noopener,noreferrer")});
+ $("webFrame").addEventListener("load",()=>{if(!currentUrl)return;$("viewState").textContent="تمت محاولة التحميل";/* Browsers do not expose reliable iframe-block detection. */});
+ $("clearHistory").addEventListener("click",()=>{visitHistory=[];renderHistory();toast("تم مسح السجل")});
+ function renderHistory(){const list=$("historyList");list.innerHTML="";if(!visitHistory.length){list.innerHTML='<div class="settingscard"><p>لا يوجد سجل بعد. افتح موقعًا وسيظهر هنا.</p></div>';return}visitHistory.forEach(item=>{const b=document.createElement("button");b.className="historyitem";b.type="button";const span=document.createElement("span");span.textContent=host(item.url);const small=document.createElement("small");small.textContent=item.url;span.appendChild(small);const arrow=document.createElement("span");arrow.textContent="↗";b.append(span,arrow);b.addEventListener("click",()=>navigate(item.url));list.appendChild(b)})}
+ renderUrl();
+})();
 </script>
-<script src="firebase-config.js"></script>
 </body>
 </html>
